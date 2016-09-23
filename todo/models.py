@@ -1,37 +1,33 @@
 from __future__ import unicode_literals
 from django.db import models
 import datetime
+from django.conf import settings
 
-PRIORITY_CHOICES = (
-	(1, 'Low'),
+PRIORIDAD = (
+	(1, 'Baja'),
 	(2, 'Normal'),
-	(3, 'High'),
+	(3, 'Alta'),
 )
 
-class List(models.Model):
-	title = models.CharField(max_length = 100, unique = True)
+class Categoria(models.Model):
+	titulo = models.CharField(max_length = 100, unique = True)
 
 	def __str__(self):
-		return self.title
+		return self.titulo
 	
 	class Meta:
-		ordering = ['title']
+		ordering = ['titulo']
 
-	class Admin:
-		pass
-
-class Item(models.Model):
-	title = models.CharField(max_length = 100)
-	create_date = models.DateTimeField(default = datetime.datetime.now)
-	priority = models.IntegerField(choices = PRIORITY_CHOICES, default = 2)
-	completed = models.BooleanField(default = False)
-	todo_list = models.ForeignKey(List)
+class Tarea(models.Model):
+	titulo = models.CharField(max_length = 100)
+	creado = models.DateTimeField(default = datetime.datetime.now, editable = False)
+	prioridad = models.IntegerField(choices = PRIORIDAD, default = 2)
+	completado = models.BooleanField(default = False)
+	usuario = models.ForeignKey(settings.AUTH_USER_MODEL, default = 1, editable = False)
+	categoria = models.ForeignKey(Categoria)
 
 	def __str__(self):
-		return self.title
+		return self.titulo
 
 	class Meta:
-		ordering = ['-priority','title']
-
-	class Admin:
-		pass
+		ordering = ['-prioridad','titulo']

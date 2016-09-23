@@ -1,14 +1,14 @@
 from django.contrib import admin
-from .models import List, Item
+from .models import Categoria, Tarea
 
-class Listadmin(admin.ModelAdmin):
-	search_fields = ['title']
-	list_display = ('title',)
+class Categoriaadmin(admin.ModelAdmin):
+	search_fields = ['titulo']
+	list_display = ('titulo',)
 
-class Itemadmin(admin.ModelAdmin):
-	search_fields = ['title','completed','priority','todo_list']
-	list_display = ('title','completed','priority','create_date','todo_list')
-	list_filter = ['title','completed','priority','todo_list']
+class Tareaadmin(admin.ModelAdmin):
+	search_fields = ['titulo','completado','prioridad','categoria','usuario']
+	list_display = ('titulo','completado','prioridad','usuario','creado','categoria')
+	list_filter = ['titulo','completado','prioridad','categoria','usuario']
 
-admin.site.register(List,Listadmin)
-admin.site.register(Item,Itemadmin)
+admin.site.register(Categoria,Categoriaadmin)
+admin.site.register(Tarea,Tareaadmin)

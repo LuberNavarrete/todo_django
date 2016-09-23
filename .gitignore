@@ -1,1 +1,3 @@
 *.pyc
+todo/migrations/*
+db.sqlite3

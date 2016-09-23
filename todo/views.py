@@ -1,10 +1,10 @@
 from django.shortcuts import render, render_to_response  
-from .models import List  
+from .models import Categoria
 
 def status_report(request):  
 	todo_listing = []
 
-	for todo_list in List.objects.all():
+	for todo_list in Categoria.objects.all():
 		todo_dict = {}
 		todo_dict['list_object'] = todo_list
 		todo_dict['item_count'] = todo_list.item_set.count()
