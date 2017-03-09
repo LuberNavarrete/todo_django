@@ -20,6 +20,7 @@ class Categoria(models.Model):
 
 class Tarea(models.Model):
 	titulo = models.CharField(max_length = 100)
+	descripcion = models.CharField(max_length = 300)
 	creado = models.DateTimeField(default = datetime.datetime.now, editable = False)
 	prioridad = models.IntegerField(choices = PRIORIDAD, default = 2)
 	completado = models.BooleanField(default = False)
